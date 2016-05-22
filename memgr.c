@@ -18,11 +18,11 @@ static union chunk_header *more_core(unsigned nu)
 
     up = (union chunk_header*) cp;
     up->s.size = nu;
-    free((void*)(up + 1));
+    ofree((void*)(up + 1));
     return freep;
 }
 
-void *malloc(unsigned nbytes)
+void *omalloc(unsigned nbytes)
 {
     union chunk_header *p, *prevp;
     unsigned nunits = (nbytes + sizeof(union chunk_header) - 1) / sizeof(union chunk_header) + 1;
@@ -51,7 +51,28 @@ void *malloc(unsigned nbytes)
     }
 }
 
-void free(void *ap)
+void ofree(void *ap)
 {
-    
+    union chunk_header *bp, *p;
+
+    bp = (union chunk_header*)ap - 1;
+    for (p = freep; !(bp > p && bp < p->s.next); p = p->s.next)
+	if (p >= p->s.next && (bp > p || bp < p->s.next))
+	    break;
+
+    if (bp + bp->s.size == p->s.next) {
+	bp->s.size += p->s.next->s.size;
+	bp->s.next = p->s.next->s.next;
+    }
+    else
+	bp->s.next = p->s.next;
+
+    if (p + p->s.size == bp) {
+	p->s.size += bp->s.size;
+	p->s.next = bp->s.next;
+    }
+    else
+	p->s.next = bp;
+
+    freep = p;
 }
