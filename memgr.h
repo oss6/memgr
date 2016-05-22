@@ -12,7 +12,7 @@ union chunk_header {
 };
 
 static union chunk_header *more_core(unsigned);
-void *omalloc(unsigned);
-void ofree(void*);
+extern void *omalloc(unsigned);
+extern void ofree(void*);
 
 #endif //MEMGR_H
