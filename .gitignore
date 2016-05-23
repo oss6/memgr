@@ -1,35 +1,46 @@
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
 *.dll
 *.so
 *.so.*
-*.dylib
-
-# Executables
-*.exe
 *.out
 *.app
 *.i*86
 *.x86_64
 *.hex
-
-# Debug files
 *.dSYM/
 *.su
 
-*.d
+autoscan.log
+autoscan-*.log
+configure.scan
+
+*~
+*.o
+*.a
+.libs
+.deps
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache
+config.guess
+config.h
+config.h.in
+config.log
+config.status
+config.sub
+configure
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+compile
+test-driver
+*.lo
+*.la
+stamp-h1
+*.pyc
+*.pc
+/build
+*.exe
