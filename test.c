@@ -8,6 +8,8 @@ int main(void)
     t = &n;
 
     printf("%d", *t);
+
+    ofree(t);
     
     return 0;
 }
